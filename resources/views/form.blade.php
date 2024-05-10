@@ -121,7 +121,10 @@
                 contentType: false,
 
                 success: function(response) {
-                    console.log(response);
+                    var urlRedirect =  "{{ route('admin.create', ['user' => ':id']) }}";
+                    urlRedirect = urlRedirect.replace(':id', user_id);
+
+                    window.location.href = urlRedirect;
                 },
                 error: function(error) {
                     if (error.responseJSON && error.responseJSON.errors) {
