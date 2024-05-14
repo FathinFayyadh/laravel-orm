@@ -48,8 +48,11 @@
                     <td>{{ $product->stock }}</td>
                     <td>{{ $product->berat }}</td>
                     <td>{{ $product->harga }}</td>
-                    <td ><p class=" p-1 rounded text-light  @if ($product->kondisi == 'baru') bg-success @else bg-dark @endif">{{ $product->kondisi }}</p>
-                       </td>
+                    <td>
+                        <p class="p-1 rounded text-light @if (strtolower($product->kondisi) == 'baru') bg-success @else bg-dark @endif">
+                            {{ $product->kondisi }}
+                        </p>
+                    </td>
                      <td > <a href="{{ route('edit.product', ['product' => $product->id, 'user' => $user->id]) }}" class="btn btn-warning">Edit</a>
                         <a href="{{ route('delete.product', ['product' => $product->id, 'user' => $user->id]) }}" class="btn btn-danger">Delete</a> </td> 
                 </tr>

@@ -27,7 +27,7 @@ class ProductController extends Controller
     public function formCreate(Request $request, User $user)
 {
     $validator = Validator::make($request->all(), [
-        'gambar' => 'required',
+        'gambar' => 'required|image',
         'name' => 'required',
         'berat' => 'required',
         'harga' => 'required',
@@ -48,6 +48,12 @@ class ProductController extends Controller
     if ($validator->fails()) {
         return redirect()->back()->withErrors($validator);
     }
+    $imagePath = $request->file('image')->store('public/product');
+
+    $product = new Product();
+    $product->name = $request->name;
+    $product->image = str_replace('public/', '', $imagePath); 
+    $product->save();
 
     Product::create([
         'user_id' => $user->id,
